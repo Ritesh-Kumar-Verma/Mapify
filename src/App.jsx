@@ -8,17 +8,22 @@ function App() {
   //to be updated as per user
   const username = "Me"
 
-  const [isLoggedIn , setIsLoggedIn] = useState(()=>{
+  const [loginStatus , setLoginStatus] = useState(()=>{
     return localStorage.getItem('isLoggedIn') === "true"
   })
+
+  // const interval = setTimeout(()=>{
+  //   setLoginStatus(false)
+  // },9000)
+
   //to view home page and to be deleted
-  localStorage.setItem('isLoggedIn',true)
+  // localStorage.setItem('isLoggedIn',true)
 
   return (
     <div>
       
       {
-        isLoggedIn ? <Home username={username}/> : <Login/>
+        loginStatus ? <Home username={username}/> : <Login setLoginStatus={setLoginStatus}/>
       }
       
     </div>

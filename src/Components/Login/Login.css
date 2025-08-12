@@ -97,15 +97,15 @@ span:hover {
   width: fit-content;
   border: none;
   color: #ff5858;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 3px;
+  padding-bottom: 5px;
 }
 .left-btn-login:hover {
   cursor: pointer;
   background-color: #ff5858;
   color: #6dd5fa;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 3px;
-  padding-bottom: 5px;
 }
 
 .right-login {
@@ -176,15 +176,15 @@ span:hover {
   width: fit-content;
   border: none;
   color: #33b0dd;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 3px;
+  padding-bottom: 5px;
 }
 .right-login .right-btn-signup:hover {
   cursor: pointer;
   background-color: #319ce4;
   color: #ff5858;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 3px;
-  padding-bottom: 5px;
 }
 
 @media (max-width: 900px) {

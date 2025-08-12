@@ -1,24 +1,68 @@
 import React, { useEffect, useState } from "react";
 import "./Login.css";
-const asd = () => {
-  const [page, setPage] = useState("loin");
-  const [formData, setFormData] = useState({
+import {assets} from "../../assets/assets";
+import axios from "axios";
+
+const Login = ({setLoginStatus}) => {
+  const [page, setPage] = useState("login");
+  const [userData, setUserData] = useState({
     email: "",
     username: "",
     password: "",
   });
-  const submitData = (e) => {
-    e.preventDefault();
 
-    const formData = new FormData(e.target);
+  const [loginData , setLoginData] = useState({
+    username : "",
+    password : ""
+  })
 
-    for (let i of formData.entries()) {
-      const tempformdata = {};
-      tempformdata[i[0]] = i[1];
-      setFormData(tempformdata);
+  const submitSignupData= (e)=>{
+    e.preventDefault()
+    if(!(userData.email.includes("@") && userData.username!=="" && userData.password.length >=4)){
+      alert("Details Missing")
+      return
     }
-    e.target.reset();
-  };
+    axios.post("http://localhost:8080/signup",userData)
+    .then(res => {
+        setLoginStatus(true)
+        console.log(res)
+      })
+    .catch(error =>{
+      console.log(error)
+    })
+  }
+
+  const handleSignupDataChange = (e)=>{
+    setUserData((prev)=>{
+      return ({...prev , [e.target.name]:e.target.value})
+    })
+    console.log(userData)
+  }
+
+  const handleLoginDataChange = (e)=>{
+    setLoginData((prev)=>{
+      return ({...prev , [e.target.name] : e.target.value})
+    })
+  }
+  
+  
+  
+  const submitLoginData = (e)=>{
+    e.preventDefault()
+    console.log(loginData)
+    if(loginData.username !== "" && loginData.password !== ""){
+      axios.post("http://localhost:8080/login",loginData)
+      .then(res => {
+        setLoginStatus(true)
+        console.log(res)})
+      .catch(error => console.log(error))
+    }
+    else{
+      alert("Check the data Again")
+    }
+  }
+
+
 
   const signUpPage = () => {
     return (
@@ -26,20 +70,20 @@ const asd = () => {
         <div className="left-signup">
           <p>Sign Up</p>
 
-          <form action="" onSubmit={submitData}>
+          <form action="" onSubmit={submitSignupData}>
             <label htmlFor="email">EMAIL</label>
 
-            <input type="text" name="email" id="email" />
+            <input type="text" name="email" id="email" onChange={handleSignupDataChange}/>
 
             <label htmlFor="username">USERNAME</label>
 
-            <input type="text" name="username" id="username" />
+            <input type="text" name="username" id="username" onChange={handleSignupDataChange}/>
 
             <label htmlFor="password">PASSWORD</label>
 
-            <input type="password" name="password" id="password" />
+            <input type="password" name="password" id="password" onChange={handleSignupDataChange}/>
 
-            <input type="checkbox" name="agreement" id="agreement" />
+            <input type="checkbox" name="agreement" id="agreement"/>
             <label htmlFor="agreement" id="agreement-label">
               I AGREE TO THE <span>TERMS OF SERVICES</span> AND{" "}
               <span>PRIVACY POLICY</span>
@@ -67,14 +111,14 @@ const asd = () => {
       <div className="login-window">
         <div className="right-login">
           <p>Login</p>
-          <form action="" onSubmit={submitData}>
+          <form action="" onSubmit={submitLoginData}>
             <label htmlFor="username">USERNAME</label>
 
-            <input type="text" name="username" id="username" />
+            <input type="text" name="username" id="username" onChange={handleLoginDataChange} />
 
             <label htmlFor="password">PASSWORD</label>
 
-            <input type="password" name="password" id="password" />
+            <input type="password" name="password" id="password" onChange={handleLoginDataChange} />
 
             <button type="submit" className="right-btn-login">
               LOGIN
@@ -98,4 +142,4 @@ const asd = () => {
   );
 };
 
-export default asd;
+export default Login;
