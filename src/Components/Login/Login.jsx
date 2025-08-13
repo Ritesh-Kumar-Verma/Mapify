@@ -1,89 +1,116 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Login.css";
-import {assets} from "../../assets/assets";
+import { assets } from "../../assets/assets";
 import axios from "axios";
 
-const Login = ({setLoginStatus}) => {
+const Login = ({ setLoginStatus, userData, setUserData }) => {
   const [page, setPage] = useState("login");
-  const [userData, setUserData] = useState({
-    email: "",
-    username: "",
-    password: "",
-  });
 
-  const [loginData , setLoginData] = useState({
-    username : "",
-    password : ""
-  })
-
-  const submitSignupData= (e)=>{
-    e.preventDefault()
-    if(!(userData.email.includes("@") && userData.username!=="" && userData.password.length >=4)){
-      alert("Details Missing")
-      return
+  const submitSignupData = (e) => {
+    e.preventDefault();
+    if (
+      !(
+        userData.email.includes("@") &&
+        userData.username !== "" &&
+        userData.password.length >= 4
+      )
+    ) {
+      alert("Details Missing");
+      return;
     }
-    axios.post("http://localhost:8080/signup",userData)
-    .then(res => {
-        setLoginStatus(true)
-        console.log(res)
+    axios
+      .post("http://localhost:8080/signup", userData)
+      .then((res) => {
+        setLoginStatus(true);
+        localStorage.setItem(
+          "username",
+          res.data.username || userData.username
+        );
+        localStorage.setItem("email", res.data.email || userData.email);
+        localStorage.setItem(
+          "password",
+          res.data.password || userData.password
+        );
+        localStorage.setItem("isLoggedIn", "true");
+        console.log(res);
       })
-    .catch(error =>{
-      console.log(error)
-    })
-  }
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-  const handleSignupDataChange = (e)=>{
-    setUserData((prev)=>{
-      return ({...prev , [e.target.name]:e.target.value})
-    })
-    console.log(userData)
-  }
+  const handleSignupDataChange = (e) => {
+    setUserData((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
 
-  const handleLoginDataChange = (e)=>{
-    setLoginData((prev)=>{
-      return ({...prev , [e.target.name] : e.target.value})
-    })
-  }
-  
-  
-  
-  const submitLoginData = (e)=>{
-    e.preventDefault()
-    console.log(loginData)
-    if(loginData.username !== "" && loginData.password !== ""){
-      axios.post("http://localhost:8080/login",loginData)
-      .then(res => {
-        setLoginStatus(true)
-        console.log(res)})
-      .catch(error => console.log(error))
+  const handleUserDataChange = (e) => {
+    setUserData((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+
+  const submitLoginData = (e) => {
+    e.preventDefault();
+    if (userData.username !== "" && userData.password !== "") {
+      axios
+        .post("http://localhost:8080/login", userData)
+        .then((res) => {
+          setLoginStatus(true);
+          setUserData((prev) => {
+            return { ...prev, email: res.data.email };
+          });
+          localStorage.setItem(
+            "username",
+            res.data.username || userData.username
+          );
+          localStorage.setItem("email", res.data.email || userData.email);
+          localStorage.setItem(
+            "password",
+            res.data.password || userData.password
+          );
+
+          localStorage.setItem("isLoggedIn", true);
+          console.log("wegot ", res);
+        })
+        .catch((error) => console.log(error));
+    } else {
+      alert("Check the data Again");
     }
-    else{
-      alert("Check the data Again")
-    }
-  }
-
-
+  };
 
   const signUpPage = () => {
     return (
       <div className="signup-window">
         <div className="left-signup">
           <p>Sign Up</p>
-
-          <form action="" onSubmit={submitSignupData}>
+          <form onSubmit={submitSignupData}>
             <label htmlFor="email">EMAIL</label>
-
-            <input type="text" name="email" id="email" onChange={handleSignupDataChange}/>
+            <input
+              type="text"
+              name="email"
+              id="email"
+              onChange={handleSignupDataChange}
+            />
 
             <label htmlFor="username">USERNAME</label>
-
-            <input type="text" name="username" id="username" onChange={handleSignupDataChange}/>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              onChange={handleSignupDataChange}
+            />
 
             <label htmlFor="password">PASSWORD</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              onChange={handleSignupDataChange}
+            />
 
-            <input type="password" name="password" id="password" onChange={handleSignupDataChange}/>
-
-            <input type="checkbox" name="agreement" id="agreement"/>
+            <input type="checkbox" name="agreement" id="agreement" />
             <label htmlFor="agreement" id="agreement-label">
               I AGREE TO THE <span>TERMS OF SERVICES</span> AND{" "}
               <span>PRIVACY POLICY</span>
@@ -111,14 +138,22 @@ const Login = ({setLoginStatus}) => {
       <div className="login-window">
         <div className="right-login">
           <p>Login</p>
-          <form action="" onSubmit={submitLoginData}>
+          <form onSubmit={submitLoginData}>
             <label htmlFor="username">USERNAME</label>
-
-            <input type="text" name="username" id="username" onChange={handleLoginDataChange} />
+            <input
+              type="text"
+              name="username"
+              id="username"
+              onChange={handleUserDataChange}
+            />
 
             <label htmlFor="password">PASSWORD</label>
-
-            <input type="password" name="password" id="password" onChange={handleLoginDataChange} />
+            <input
+              type="password"
+              name="password"
+              id="password"
+              onChange={handleUserDataChange}
+            />
 
             <button type="submit" className="right-btn-login">
               LOGIN

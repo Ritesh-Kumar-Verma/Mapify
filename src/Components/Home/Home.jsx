@@ -9,50 +9,25 @@ import Groups from '../Groups/Groups'
 import Map from "../Map/Map";
 import Me from "../Me/Me";
 
-const Home = ({username}) => {
+const Home = ({userData,setUserData ,setLoginStatus , users ,setUsers}) => {
     const [activeTab , setActiveTab] = useState("Me")
   
-    const [position , updatePosition] = useState(null)
 
-    const tabComponents = {"Members":<Members/>,
+    const tabComponents = {"Members":<Members userData={userData} />,
     
       "Groups":<Groups/>,
-      "Me":<Me/>
+      "Me":<Me userData={userData} setUserData={setUserData} users={users} setUsers={setUsers}/>
     
-    }
-
-    useEffect(()=>{
-      navigator.geolocation.getCurrentPosition((pos)=>{
-        const {latitude,longitude} = pos.coords
-        updatePosition([latitude,longitude])
-      },(error)=>{
-        console.error("error in getting location")
-      },{
-        enableHighAccuracy:true,
-        timeout:1000,
-        maximumAge:0
-      })
-    },[])
-
-
-    
-
-
+    }   
 
   return <div className="home-window">
     
     {/* <Sidebar/> */}
 
-    <Navbar username={username} activeTab={activeTab} setActiveTab={setActiveTab}/>
-
+    <Navbar userData={userData} setUserData={setUserData} setLoginStatus={setLoginStatus}  activeTab={activeTab} setActiveTab={setActiveTab}/>
 
     {tabComponents[activeTab]}
 
-  
-
-     
-   
-    
     </div>;
 };
 

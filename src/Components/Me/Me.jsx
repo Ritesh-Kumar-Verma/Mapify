@@ -1,42 +1,70 @@
-import React, { useEffect, useState } from 'react'
-import './Me.css'
-import { MapContainer } from 'react-leaflet'
-import Map from '../Map/Map'
+import React, { useEffect, useState } from "react";
+import "./Me.css";
+import { MapContainer } from "react-leaflet";
+import Map from "../Map/Map";
+import axios from "axios";
 
+const Me = ({ userData, setUserData, users, setUsers }) => {
+  useEffect(() => {
+    if (navigator.geolocation) {
+      const myWatcher = navigator.geolocation.watchPosition(
+        (pos) => {
+          const { latitude, longitude } = pos.coords;
 
-const Me = () => {
-    const [myPosition , setMyPosition] = useState(null)
-    useEffect(()=>{
+          //   console.log([latitude, longitude]);
 
-        if(navigator.geolocation){
-        const myWatcher = navigator.geolocation.watchPosition(
-        (pos)=>{const {latitude,longitude} = pos.coords
-        console.log([latitude,longitude])
-            setMyPosition([latitude,longitude])
-    },
-        (error)=>{console.log(error)},
-        {enableHighAccuracy:true,
-            maximumAge:0,
-            timeout:10000
-        }
-    )
-        return ()=>{navigator.geolocation.clearWatch(myWatcher)}
+          setUsers((prev) => {
+            return { ...prev, me: [latitude, longitude] };
+          });
+
+          setUserData((prev) => {
+            return {
+              ...prev,
+              latitude: latitude,
+              longitude: longitude,
+            };
+          });
+        },
+        (error) => {
+          console.log(error);
+        },
+        { enableHighAccuracy: true, maximumAge: 0, timeout: 10000 }
+      );
+      return () => {
+        navigator.geolocation.clearWatch(myWatcher);
+      };
     }
+  }, []);
 
-    },[])
-    
-    
+  useEffect(() => {
+    // console.log("Postiong new Location");
+    // console.log(userData);
+    const postingJson = {
+      userData: userData,
+      usersLoginDetails: {
+        username: userData.username,
+        email: userData.email,
+        password: userData.password,
+      },
+    };
+
+    // console.log(postingJson);
+
+    axios
+      .post("http://localhost:8080/addselflocation", postingJson)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [userData]);
+
   return (
     <div className="my-location-window">
-        <Map position={myPosition}/>
+      <Map position={users.me ? [users.me[0], users.me[1]] : null} />
     </div>
-  )
-}
+  );
+};
 
-export default Me
-
-
-
-
-
-
+export default Me;

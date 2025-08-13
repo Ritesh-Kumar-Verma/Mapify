@@ -2,30 +2,37 @@ import { useState } from 'react'
 import './App.css'
 import Login from './Components/Login/Login'
 import Home from './Components/Home/Home'
+
 function App() {
 
+  const [userData, setUserData] = useState({
+    email: localStorage.getItem("email") || "",
+    username: localStorage.getItem("username") || "", 
+    password: localStorage.getItem("password") || ""
+  });
 
-  //to be updated as per user
-  const username = "Me"
+  
 
-  const [loginStatus , setLoginStatus] = useState(()=>{
-    return localStorage.getItem('isLoggedIn') === "true"
+  const [users , setUsers] = useState({
+    me:[0,0]
   })
 
-  // const interval = setTimeout(()=>{
-  //   setLoginStatus(false)
-  // },9000)
-
-  //to view home page and to be deleted
-  // localStorage.setItem('isLoggedIn',true)
+  const [loginStatus , setLoginStatus] = useState(()=>{
+    return localStorage.getItem('isLoggedIn') == "true"
+  });
+  console.log(loginStatus)
 
   return (
     <div>
-      
       {
-        loginStatus ? <Home username={username}/> : <Login setLoginStatus={setLoginStatus}/>
+        loginStatus
+          ? <Home userData={userData} users={users} setUsers={setUsers} setUserData={setUserData} setLoginStatus={setLoginStatus}/>
+          : <Login 
+              setLoginStatus={setLoginStatus}  
+              userData={userData}  
+              setUserData={setUserData}
+            />
       }
-      
     </div>
   )
 }
