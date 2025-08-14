@@ -1,5 +1,11 @@
 .home-window{
-    background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+ background: linear-gradient(
+  180deg, 
+  #1b2a3a 0%,   
+  #16212e 100%  
+);
+
+color: #cbd5e0;
   background-size: cover;
   height: 100vh;
   width: 100vw;

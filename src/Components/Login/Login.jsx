@@ -72,7 +72,7 @@ const Login = ({ setLoginStatus, userData, setUserData }) => {
           );
 
           localStorage.setItem("isLoggedIn", true);
-          console.log("wegot ", res);
+          // console.log("wegot ", res);
         })
         .catch((error) => console.log(error));
     } else {

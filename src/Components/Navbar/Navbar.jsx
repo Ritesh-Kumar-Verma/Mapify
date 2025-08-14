@@ -61,6 +61,7 @@ const Navbar = ({ userData, activeTab,setLoginStatus , setUserData, setActiveTab
       <div className="navbar-top">
         <div className="left-navbar">
           {/* <img src={assets.boy} alt="" /> */}
+          Mapify
         </div>
         <div className="navbar-search-box">
           <img src={assets.search} alt="" />
