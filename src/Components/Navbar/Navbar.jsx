@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const Navbar = ({ userData, activeTab,setLoginStatus , setUserData, setActiveTab }) => {
-  const navbarMenuItems = ["Members", "Groups", "Me"];
+  const navbarMenuItems = ["Members", "Groups", "Me","Requests"];
 
   const [membersList , setMembersList] = useState([])
 
@@ -33,6 +33,7 @@ const Navbar = ({ userData, activeTab,setLoginStatus , setUserData, setActiveTab
     .then(res=>{
       // console.log(res.data)
       setMembersList(res.data)
+      console.log(res.data)
     })
     .catch(error=>{
       console.log(error)

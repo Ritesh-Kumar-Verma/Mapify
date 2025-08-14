@@ -8,15 +8,18 @@ import Groups from '../Groups/Groups'
 //need to delete if not used
 import Map from "../Map/Map";
 import Me from "../Me/Me";
+import Requests from "../Requests/Requests";
 
 const Home = ({userData,setUserData ,setLoginStatus , users ,setUsers}) => {
-    const [activeTab , setActiveTab] = useState("Me")
+    const [activeTab , setActiveTab] = useState("Requests")
   
 
     const tabComponents = {"Members":<Members userData={userData} />,
     
       "Groups":<Groups/>,
-      "Me":<Me userData={userData} setUserData={setUserData} users={users} setUsers={setUsers}/>
+      "Me":<Me userData={userData} setUserData={setUserData} users={users} setUsers={setUsers}/>,
+
+      "Requests": <Requests userData={userData}/>
     
     }   
 

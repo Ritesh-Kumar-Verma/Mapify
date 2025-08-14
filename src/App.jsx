@@ -20,7 +20,7 @@ function App() {
   const [loginStatus , setLoginStatus] = useState(()=>{
     return localStorage.getItem('isLoggedIn') == "true"
   });
-  console.log(loginStatus)
+  // console.log(loginStatus)
 
   return (
     <div>
