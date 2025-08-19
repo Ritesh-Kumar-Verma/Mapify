@@ -1,23 +1,57 @@
 import React, { useEffect, useState } from "react";
 import "./Members.css";
 import Map from "../Map/Map";
-const Members = (userData) => {
-  
-  const membersList = ["Sinchan", "Nobita", "Kenichi"];
+import axios from "axios";
+const Members = ({ userData }) => {
   const [activeMember, setActiveMember] = useState(null);
 
+  const [membersList, setMembersList] = useState([]);
 
+  const [memberPos, setMemberPos] = useState([]);
 
-  const samplePos = {
-    Sinchan: [28.6139, 77.209],
-    Nobita: [25.3176, 82.9739],
-    Kenichi: [26.8467, 80.9462],
+  useEffect(() => {
+    axios
+      .post("http://localhost:8080/getmemberslist", userData)
+      .then((res) => {
+        console.log(res.data);
+
+        setMembersList(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const getLocations = (username) => {
+    axios
+      .post("http://localhost:8080/getlocation", userData, {
+        params: {
+          username: username,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setMemberPos(res.data);
+      })
+      .catch((error) => {
+        console.log(error.data);
+      });
   };
 
 
-  
+  useEffect(() => {
+    if (membersList.length >= 1 && !activeMember) {
+      setActiveMember(membersList[0]);
+    }
+  }, [membersList]);
 
 
+
+
+  useEffect(() => {
+    if(activeMember)
+    getLocations(activeMember);
+  }, [activeMember]);
 
 
 
@@ -40,7 +74,7 @@ const Members = (userData) => {
         })}
       </div>
       <div className="member-map-info">
-        <Map position={samplePos[activeMember]} />
+        {memberPos.length>0 && <Map position={memberPos} />}
       </div>
     </div>
   );

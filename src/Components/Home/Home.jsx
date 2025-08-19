@@ -5,13 +5,12 @@ import Navbar from '../Navbar/Navbar'
 import {useState} from 'react'
 import Members from '../Members/Members'
 import Groups from '../Groups/Groups'
-//need to delete if not used
-import Map from "../Map/Map";
+
 import Me from "../Me/Me";
 import Requests from "../Requests/Requests";
 
 const Home = ({userData,setUserData ,setLoginStatus , users ,setUsers}) => {
-    const [activeTab , setActiveTab] = useState("Requests")
+    const [activeTab , setActiveTab] = useState("Members")
   
 
     const tabComponents = {"Members":<Members userData={userData} />,

@@ -6,8 +6,9 @@ const Requests = ({ userData }) => {
   const [sentRequestsList, setSentRequestsList] = useState([]);
   const [receivedRequestList, setReceivedRequestList] = useState([]);
 
-  useEffect(() => {
-    axios
+
+  const pendingRequestFromMe = ()=>{
+     axios
       .post("http://localhost:8080/pendingrequestsfromme", userData)
       .then((res) => {
         setSentRequestsList(res.data);
@@ -15,7 +16,10 @@ const Requests = ({ userData }) => {
       .catch((error) => {
         console.log(error);
       });
+  }
 
+  const pendingRequest= ()=>{
+    
     axios
       .post("http://localhost:8080/pendingrequests", userData)
       .then((res) => {
@@ -24,7 +28,36 @@ const Requests = ({ userData }) => {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  useEffect(() => {
+   pendingRequestFromMe()
+   
+   pendingRequest()
+
   }, []);
+
+  const handleAccept = (data) => {
+    axios.post("http://localhost:8080/acceptrequest",userData,{params : {username : data}})
+      .then((res) => {
+        if(res.data === "Accepted"){
+          pendingRequest()
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleReject = (data)=>{
+    axios.post("http://localhost:8080/rejectrequest",userData,{params : {username : data}})
+    .then(res=>{
+      pendingRequest()
+    })
+    .catch(error=>{
+      console.log(error)
+    })
+  }
 
   return (
     <div className="requests-window">
@@ -33,7 +66,7 @@ const Requests = ({ userData }) => {
         {sentRequestsList.map((data, index) => (
           <div className="request-row" key={index}>
             <div className="requests-item">{data}</div>
-            <button>Cancel</button>
+            <button >Cancel</button>
           </div>
         ))}
       </div>
@@ -44,8 +77,8 @@ const Requests = ({ userData }) => {
           <div className="request-row" key={index}>
             <div className="requests-item">{data}</div>
             <div className="button">
-              <button>Accept</button>
-              <button>Reject</button>
+              <button onClick={() => handleAccept(data)}>Accept</button>
+              <button onClick={()=>{handleReject(data)}}>Reject</button>
             </div>
           </div>
         ))}

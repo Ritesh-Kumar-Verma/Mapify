@@ -52,7 +52,6 @@ const Navbar = ({ userData, activeTab,setLoginStatus , setUserData, setActiveTab
       console.log(error)
     })
 
-
   }
   
 
