@@ -4,6 +4,13 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const Navbar = ({ userData, activeTab,setLoginStatus , setUserData, setActiveTab }) => {
+
+
+      const mapify_backend_url = import.meta.env.VITE_mapify_backend_url;
+
+
+
+
   const navbarMenuItems = ["Members", "Groups", "Me","Requests"];
 
   const [membersList , setMembersList] = useState([])

@@ -3,6 +3,13 @@ import "./Requests.css";
 import axios from "axios";
 
 const Requests = ({ userData }) => {
+
+
+      const mapify_backend_url = import.meta.env.VITE_mapify_backend_url;
+
+
+
+
   const [sentRequestsList, setSentRequestsList] = useState([]);
   const [receivedRequestList, setReceivedRequestList] = useState([]);
 
