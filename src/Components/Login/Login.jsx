@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import "./Login.css";
-import { assets } from "../../assets/assets";
+import Toast from "../Toast/Toast"
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Login = ({ setLoginStatus, userData, setUserData }) => {
   
   
   const mapify_backend_url = import.meta.env.VITE_mapify_backend_url;
+
 
 
 
@@ -39,10 +41,14 @@ const Login = ({ setLoginStatus, userData, setUserData }) => {
           res.data.password || userData.password
         );
         localStorage.setItem("isLoggedIn", "true");
-        console.log(res);
+        // console.log(res);
+        toast.success("Loggin in")
       })
       .catch((error) => {
         console.log(error);
+        if(error.response.status == 406){
+          toast.error("Username Already Exist")
+        }
       });
   };
 
@@ -81,7 +87,10 @@ const Login = ({ setLoginStatus, userData, setUserData }) => {
           localStorage.setItem("isLoggedIn", true);
           // console.log("wegot ", res);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.log(error)
+          toast.error("Check Username or Password")
+        });
     } else {
       alert("Check the data Again");
     }
@@ -180,6 +189,7 @@ const Login = ({ setLoginStatus, userData, setUserData }) => {
   return (
     <div className="login-signup-window">
       {page === "login" ? loginPage() : signUpPage()}
+      <Toast/>
     </div>
   );
 };
