@@ -11,6 +11,9 @@
   border-radius: 12px;
   color: #ffffff;
 }
+.make-navbar-highest{
+  z-index: 10000;
+}
 .navbar:hover {
   box-shadow: 0 0 25px rgba(0, 255, 255, 0.7);
 }
@@ -43,7 +46,6 @@
 .search-result {
   position: absolute;
   top: 105%;
-  /* z-index: 10; */
   left: 0;
   background-color: white;
   border-radius: 0 0 10px 10px;

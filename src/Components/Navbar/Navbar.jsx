@@ -3,24 +3,27 @@ import { assets } from "../../assets/assets";
 import React, { useState } from "react";
 import axios from "axios";
 
-const Navbar = ({ userData, activeTab,setLoginStatus , setUserData, setActiveTab }) => {
+const Navbar = ({
+  userData,
+  activeTab,
+  setLoginStatus,
+  setUserData,
+  setActiveTab,
+}) => {
+  const mapify_backend_url = import.meta.env.VITE_mapify_backend_url;
 
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
 
-      const mapify_backend_url = import.meta.env.VITE_mapify_backend_url;
+  const navbarMenuItems = ["Members", "Groups", "Me", "Requests"];
 
-
-
-
-  const navbarMenuItems = ["Members", "Groups", "Me","Requests"];
-
-  const [membersList , setMembersList] = useState([])
+  const [membersList, setMembersList] = useState([]);
 
   const handleLogout = () => {
-    setLoginStatus(false)
-    localStorage.setItem("email" , "")
-    localStorage.setItem("username","")
-    localStorage.setItem("password","")
-    localStorage.setItem("isLoggedIn",false)
+    setLoginStatus(false);
+    localStorage.setItem("email", "");
+    localStorage.setItem("username", "");
+    localStorage.setItem("password", "");
+    localStorage.setItem("isLoggedIn", false);
 
     setUserData({
       email: "",
@@ -30,40 +33,42 @@ const Navbar = ({ userData, activeTab,setLoginStatus , setUserData, setActiveTab
       longitude: 0,
     });
   };
-  const handleSearchBoxChange = (e)=>{
-    e.preventDefault()
-    if(e.target.value.trim() == ''){
-      setMembersList([])
-      return
+  const handleSearchBoxChange = (e) => {
+    e.preventDefault();
+    if (e.target.value.trim() == "") {
+      setMembersList([]);
+      return;
     }
-    axios.post(`${mapify_backend_url}/search`,userData,{params : {username : e.target.value}})
-    .then(res=>{
-      // console.log(res.data)
-      setMembersList(res.data)
-      console.log(res.data)
-    })
-    .catch(error=>{
-      console.log(error)
-    })
-  }
-
+    axios
+      .post(`${mapify_backend_url}/search`, userData, {
+        params: { username: e.target.value },
+      })
+      .then((res) => {
+        // console.log(res.data)
+        setMembersList(res.data);
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   //to be written
-  const handleSendRequest=(data)=>{
-
-    axios.post(`${mapify_backend_url}/sendrequest`,userData,{params : {username : data}})
-    .then(res=>{
-      console.log(res.data)
-    })
-    .catch(error=>{
-      console.log(error)
-    })
-
-  }
-  
+  const handleSendRequest = (data) => {
+    axios
+      .post(`${mapify_backend_url}/sendrequest`, userData, {
+        params: { username: data },
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
-    <header className="navbar">
+    <header className={`navbar ${isSearchFocused ? "make-navbar-highest" : ""}`}>
       <div className="navbar-top">
         <div className="left-navbar">
           {/* <img src={assets.boy} alt="" /> */}
@@ -72,20 +77,34 @@ const Navbar = ({ userData, activeTab,setLoginStatus , setUserData, setActiveTab
         <div className="navbar-search-box">
           <img src={assets.search} alt="" />
 
-          <input type="text" placeholder="Search..." onChange={handleSearchBoxChange} />
-          <div className="search-result">
-            {membersList.map((data,index)=>{
-              return(
-                
-                <React.Fragment key={index}>
-                  <div className="search-result-item">
-                    <div>{data}</div>
-                    <button className="send-request-btn" onClick={()=>{handleSendRequest(data)}}>Send Request</button>
-                  </div>
-                </React.Fragment>
-              )
-            })}
-          </div>
+          <input
+            type="text"
+            placeholder="Search..."
+            onFocus={()=>setIsSearchFocused(true)}
+            onBlur={()=>setIsSearchFocused(false)}
+            onChange={handleSearchBoxChange}
+          />
+          {isSearchFocused && membersList.length > 0 && (
+            <div className="search-result">
+              {membersList.map((data, index) => {
+                return (
+                  <React.Fragment key={index}>
+                    <div className="search-result-item">
+                      <div>{data}</div>
+                      <button
+                        className="send-request-btn"
+                        onClick={() => {
+                          handleSendRequest(data);
+                        }}
+                      >
+                        Send Request
+                      </button>
+                    </div>
+                  </React.Fragment>
+                );
+              })}
+            </div>
+          )}
         </div>
         <div className="right-navbar">
           <div className="navbar-username">{userData.username}</div>
