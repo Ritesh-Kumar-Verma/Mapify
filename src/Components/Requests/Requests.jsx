@@ -38,10 +38,15 @@ const Requests = ({ userData }) => {
   }
 
   useEffect(() => {
-   pendingRequestFromMe()
-   
-   pendingRequest()
+    const requestIntervalId = setInterval(()=>{
+      pendingRequestFromMe()
+      
+      pendingRequest()
 
+    },3000)
+    return ()=>{
+      clearInterval(requestIntervalId)
+    }
   }, []);
 
   const handleAccept = (data) => {

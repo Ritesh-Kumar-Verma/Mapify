@@ -53,11 +53,22 @@ const Members = ({ userData }) => {
 
 
 
+useEffect(() => {
+  let intervalId; 
 
-  useEffect(() => {
-    if(activeMember)
-    getLocations(activeMember);
-  }, [activeMember]);
+  if (activeMember) {
+    intervalId = setInterval(() => {
+      getLocations(activeMember);
+    }, 3000);
+  }
+
+  return () => {
+    if (intervalId) {
+      clearInterval(intervalId);
+    }
+  };
+}, [activeMember]);
+
 
 
 
