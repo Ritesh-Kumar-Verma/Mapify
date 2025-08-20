@@ -107,6 +107,7 @@ const Login = ({ setLoginStatus, userData, setUserData }) => {
               type="text"
               name="email"
               id="email"
+              value={userData.email}
               onChange={handleSignupDataChange}
             />
 
@@ -115,6 +116,7 @@ const Login = ({ setLoginStatus, userData, setUserData }) => {
               type="text"
               name="username"
               id="username"
+              value={userData.username}
               onChange={handleSignupDataChange}
             />
 
@@ -123,6 +125,7 @@ const Login = ({ setLoginStatus, userData, setUserData }) => {
               type="password"
               name="password"
               id="password"
+              value={userData.password}
               onChange={handleSignupDataChange}
             />
 
@@ -139,7 +142,11 @@ const Login = ({ setLoginStatus, userData, setUserData }) => {
             <button
               type="button"
               className="left-btn-login"
-              onClick={() => setPage("login")}
+              onClick={() => {
+                setPage("login")
+                setUserData((prev)=>({...prev , password : ""}))
+                console.log(userData)
+              }}
             >
               LOG IN
             </button>
@@ -160,6 +167,7 @@ const Login = ({ setLoginStatus, userData, setUserData }) => {
               type="text"
               name="username"
               id="username"
+              value={userData.username}
               onChange={handleUserDataChange}
             />
 
@@ -168,6 +176,7 @@ const Login = ({ setLoginStatus, userData, setUserData }) => {
               type="password"
               name="password"
               id="password"
+              value={userData.password}
               onChange={handleUserDataChange}
             />
 
@@ -176,7 +185,10 @@ const Login = ({ setLoginStatus, userData, setUserData }) => {
             </button>
             <button
               className="right-btn-signup"
-              onClick={() => setPage("signup")}
+              onClick={
+                () => {setPage("signup")
+                setUserData((prev)=>({...prev , password : ""}))
+              }}
             >
               Sign Up
             </button>
