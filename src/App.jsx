@@ -17,13 +17,13 @@ function App() {
     me:[0,0]
   })
 
-  // const [loginStatus , setLoginStatus] = useState(()=>{
-  //   return localStorage.getItem('isLoggedIn') == "true"
-  // });
+  const [loginStatus , setLoginStatus] = useState(()=>{
+    return localStorage.getItem('isLoggedIn') == "true"
+  });
 
 
 
-  const [loginStatus , setLoginStatus] = useState(true)
+  // const [loginStatus , setLoginStatus] = useState(true)
 
   
   // console.log(loginStatus)

@@ -9,7 +9,7 @@ const Requests = ({ userData }) => {
 
   const pendingRequestFromMe = ()=>{
      axios
-      .post("http://localhost:8080/pendingrequestsfromme", userData)
+      .post(`${mapify_backend_url}/pendingrequestsfromme`, userData)
       .then((res) => {
         setSentRequestsList(res.data);
       })
@@ -21,7 +21,7 @@ const Requests = ({ userData }) => {
   const pendingRequest= ()=>{
     
     axios
-      .post("http://localhost:8080/pendingrequests", userData)
+      .post(`${mapify_backend_url}/pendingrequests`, userData)
       .then((res) => {
         setReceivedRequestList(res.data);
       })
@@ -38,7 +38,7 @@ const Requests = ({ userData }) => {
   }, []);
 
   const handleAccept = (data) => {
-    axios.post("http://localhost:8080/acceptrequest",userData,{params : {username : data}})
+    axios.post(`${mapify_backend_url}/acceptrequest`,userData,{params : {username : data}})
       .then((res) => {
         if(res.data === "Accepted"){
           pendingRequest()
@@ -50,7 +50,7 @@ const Requests = ({ userData }) => {
   };
 
   const handleReject = (data)=>{
-    axios.post("http://localhost:8080/rejectrequest",userData,{params : {username : data}})
+    axios.post(`${mapify_backend_url}/rejectrequest`,userData,{params : {username : data}})
     .then(res=>{
       pendingRequest()
     })

@@ -29,7 +29,7 @@ const Navbar = ({ userData, activeTab,setLoginStatus , setUserData, setActiveTab
       setMembersList([])
       return
     }
-    axios.post("http://localhost:8080/search",userData,{params : {username : e.target.value}})
+    axios.post(`${mapify_backend_url}/search`,userData,{params : {username : e.target.value}})
     .then(res=>{
       // console.log(res.data)
       setMembersList(res.data)
@@ -44,7 +44,7 @@ const Navbar = ({ userData, activeTab,setLoginStatus , setUserData, setActiveTab
   //to be written
   const handleSendRequest=(data)=>{
 
-    axios.post("http://localhost:8080/sendrequest",userData,{params : {username : data}})
+    axios.post(`${mapify_backend_url}/sendrequest`,userData,{params : {username : data}})
     .then(res=>{
       console.log(res.data)
     })

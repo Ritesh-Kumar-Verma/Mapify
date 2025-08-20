@@ -4,8 +4,15 @@ import { assets } from "../../assets/assets";
 import axios from "axios";
 
 const Login = ({ setLoginStatus, userData, setUserData }) => {
-  const [page, setPage] = useState("login");
+  
+  
+  const mapify_backend_url = import.meta.env.VITE_mapify_backend_url;
 
+
+
+
+
+  const [page, setPage] = useState("login");
   const submitSignupData = (e) => {
     e.preventDefault();
     if (
@@ -19,7 +26,7 @@ const Login = ({ setLoginStatus, userData, setUserData }) => {
       return;
     }
     axios
-      .post("http://localhost:8080/signup", userData)
+      .post(`${mapify_backend_url}/signup`, userData)
       .then((res) => {
         setLoginStatus(true);
         localStorage.setItem(
@@ -55,7 +62,7 @@ const Login = ({ setLoginStatus, userData, setUserData }) => {
     e.preventDefault();
     if (userData.username !== "" && userData.password !== "") {
       axios
-        .post("http://localhost:8080/login", userData)
+        .post(`${mapify_backend_url}/login`, userData)
         .then((res) => {
           setLoginStatus(true);
           setUserData((prev) => {

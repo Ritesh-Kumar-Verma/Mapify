@@ -5,6 +5,13 @@ import Map from "../Map/Map";
 import axios from "axios";
 
 const Me = ({ userData, setUserData, users, setUsers }) => {
+
+    const mapify_backend_url = import.meta.env.VITE_mapify_backend_url;
+
+
+
+
+
   useEffect(() => {
     if (navigator.geolocation) {
       const myWatcher = navigator.geolocation.watchPosition(
@@ -51,7 +58,7 @@ const Me = ({ userData, setUserData, users, setUsers }) => {
     // console.log(postingJson);
 
     axios
-      .post("http://localhost:8080/addselflocation", postingJson)
+      .post(`${mapify_backend_url}/addselflocation`, postingJson)
       .then((res) => {
         console.log(res.data);
       })

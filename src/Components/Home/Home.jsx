@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
 import "./Home.css";
-import Sidebar from "../Sidebar/Sidebar";
 import Navbar from '../Navbar/Navbar'
 import {useState} from 'react'
 import Members from '../Members/Members'

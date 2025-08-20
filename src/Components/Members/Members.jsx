@@ -11,7 +11,7 @@ const Members = ({ userData }) => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:8080/getmemberslist", userData)
+      .post(`${mapify_backend_url}/getmemberslist`, userData)
       .then((res) => {
         console.log(res.data);
 
@@ -24,7 +24,7 @@ const Members = ({ userData }) => {
 
   const getLocations = (username) => {
     axios
-      .post("http://localhost:8080/getlocation", userData, {
+      .post(`${mapify_backend_url}/getlocation`, userData, {
         params: {
           username: username,
         },
