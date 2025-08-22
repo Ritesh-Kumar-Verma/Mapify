@@ -4,7 +4,7 @@ import { MapContainer } from "react-leaflet";
 import Map from "../Map/Map";
 import axios from "axios";
 
-const Me = ({ userData, setUserData, users, setUsers }) => {
+const Me = ({ userData, setUserData, users, setUsers,setIsSearchFocused }) => {
 
 
 
@@ -13,7 +13,7 @@ const Me = ({ userData, setUserData, users, setUsers }) => {
 
 
   return (
-    <div className="my-location-window">
+    <div className="my-location-window" onClick={()=>setIsSearchFocused(false)}>
       <Map position={users.me ? [users.me[0], users.me[1]] : null} />
     </div>
   );

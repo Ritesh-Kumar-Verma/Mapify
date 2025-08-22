@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Requests.css";
 import axios from "axios";
 
-const Requests = ({ userData }) => {
+const Requests = ({ userData,setIsSearchFocused }) => {
 
 
       const mapify_backend_url = import.meta.env.VITE_mapify_backend_url;
@@ -72,7 +72,7 @@ const Requests = ({ userData }) => {
   }
 
   return (
-    <div className="requests-window">
+    <div className="requests-window" onClick={()=>setIsSearchFocused(false)}>
       <div className="top">
         <div className="title">You Requested</div>
         {sentRequestsList.map((data, index) => (

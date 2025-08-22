@@ -64,8 +64,10 @@ function App() {
       },
     };
 
-    // console.log(postingJson);
-
+    
+    if(!loginStatus){
+      return 
+    }
     axios
       .post(`${mapify_backend_url}/addselflocation`, postingJson)
       .then((res) => {

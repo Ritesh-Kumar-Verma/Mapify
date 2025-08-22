@@ -9,10 +9,10 @@ const Navbar = ({
   setLoginStatus,
   setUserData,
   setActiveTab,
+  isSearchFocused,
+  setIsSearchFocused
 }) => {
   const mapify_backend_url = import.meta.env.VITE_mapify_backend_url;
-
-  const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   const navbarMenuItems = ["Members", "Groups", "Me", "Requests"];
 
@@ -81,7 +81,6 @@ const Navbar = ({
             type="text"
             placeholder="Search..."
             onFocus={()=>setIsSearchFocused(true)}
-            onBlur={()=>setIsSearchFocused(false)}
             onChange={handleSearchBoxChange}
           />
           {isSearchFocused && membersList.length > 0 && (

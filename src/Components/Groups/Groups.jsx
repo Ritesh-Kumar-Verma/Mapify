@@ -1,8 +1,8 @@
 import React from 'react'
 import "./Groups.css"
-const Groups = () => {
+const Groups = ({setIsSearchFocused}) => {
   return (
-    <div className='group-window'>Coming Soon...</div>
+    <div className='group-window' onClick={()=>setIsSearchFocused(false)}>Coming Soon...</div>
   )
 }
 

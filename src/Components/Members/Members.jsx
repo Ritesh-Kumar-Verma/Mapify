@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Members.css";
 import Map from "../Map/Map";
 import axios from "axios";
-const Members = ({ userData }) => {
-
+const Members = ({ userData, setIsSearchFocused }) => {
       const mapify_backend_url = import.meta.env.VITE_mapify_backend_url;
 
 
@@ -74,7 +73,7 @@ useEffect(() => {
 
 
   return (
-    <div className="members-window">
+    <div className="members-window" onClick={()=>setIsSearchFocused(false)}>
       <div className="members-list">
         {membersList.map((data, index) => {
           return (

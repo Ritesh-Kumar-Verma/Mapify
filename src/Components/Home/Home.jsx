@@ -9,14 +9,18 @@ import Requests from "../Requests/Requests";
 
 const Home = ({userData,setUserData ,setLoginStatus , users ,setUsers}) => {
     const [activeTab , setActiveTab] = useState("Members")
+
+    
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+
   
 
-    const tabComponents = {"Members":<Members userData={userData} />,
+    const tabComponents = {"Members":<Members userData={userData} setIsSearchFocused ={setIsSearchFocused} />,
     
-      "Groups":<Groups/>,
-      "Me":<Me userData={userData} setUserData={setUserData} users={users} setUsers={setUsers}/>,
+      "Groups":<Groups setIsSearchFocused ={setIsSearchFocused}/>,
+      "Me":<Me userData={userData} setUserData={setUserData} users={users} setUsers={setUsers} setIsSearchFocused ={setIsSearchFocused}/>,
 
-      "Requests": <Requests userData={userData}/>
+      "Requests": <Requests userData={userData} setIsSearchFocused ={setIsSearchFocused}/>
     
     }   
 
@@ -24,7 +28,7 @@ const Home = ({userData,setUserData ,setLoginStatus , users ,setUsers}) => {
     
     {/* <Sidebar/> */}
 
-    <Navbar userData={userData} setUserData={setUserData} setLoginStatus={setLoginStatus}  activeTab={activeTab} setActiveTab={setActiveTab}/>
+    <Navbar userData={userData} setUserData={setUserData} setLoginStatus={setLoginStatus}  activeTab={activeTab} setActiveTab={setActiveTab} isSearchFocused={isSearchFocused} setIsSearchFocused={setIsSearchFocused} />
 
     {tabComponents[activeTab]}
 
