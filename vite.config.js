@@ -4,12 +4,12 @@ import react from '@vitejs/plugin-react-swc'
 export default defineConfig({
   plugins: [react()],
   
-  server: {
-      host: true, // 👈 allows access from local network (e.g., 192.168.x.x)
-      port: 5173, // or any port you want
-    },
-  
   base: '/Mapify/'
 })
 
+
+// server: {
+//     host: true, // 👈 allows access from local network (e.g., 192.168.x.x)
+//     port: 5173, // or any port you want
+//   },
 
