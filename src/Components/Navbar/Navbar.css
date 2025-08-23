@@ -10,6 +10,7 @@
   padding: 1rem;
   border-radius: 12px;
   color: #ffffff;
+  font-size: 1rem;
 }
 .make-navbar-highest{
   z-index: 10000;
@@ -91,9 +92,11 @@
 .navbar-menu-items {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 10px;
   margin-top: 10px;
+
 }
 
 .left-menu-item {
@@ -117,6 +120,30 @@
   color: blue;
   border-bottom: 1px blue solid;
 }
+
+.dropdown-menu{
+  position: relative;
+}
+.dropdown-menu-items{
+  position: absolute;
+  top: 120%;
+  
+  background-color: #3498db;
+  border-radius: 5px;
+}
+.dropdown-item{
+  color: white;
+  border-bottom: 1px solid black;
+  padding: 5px;
+}
+.dropdown-item:last-child{
+  border-bottom: none;
+}
+.up-down{
+  cursor: pointer;
+}
+
+
 .logout-button {
   padding: 5px 10px;
 background: rgba(255, 0, 0, 0.1);

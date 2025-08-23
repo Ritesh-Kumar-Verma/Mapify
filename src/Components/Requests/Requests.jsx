@@ -5,8 +5,7 @@ import axios from "axios";
 const Requests = ({ userData,setIsSearchFocused }) => {
 
 
-      const mapify_backend_url = import.meta.env.VITE_mapify_backend_url;
-
+  const mapify_backend_url = import.meta.env.VITE_mapify_backend_url;
 
 
 

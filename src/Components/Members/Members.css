@@ -8,9 +8,13 @@
     /* background-color: white;     */
     display: flex;
     flex-direction: column;
-    border-right: 1px white solid;
     gap: 10px;
 }
+
+.members-list:not(:empty) {
+  border-right: 1px white solid;
+}
+
 
 .member{
     padding: 10px;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Members.css";
 import Map from "../Map/Map";
 import axios from "axios";
-const Members = ({ userData, setIsSearchFocused }) => {
+const Members = ({ userData, setIsSearchFocused,membersList , setMembersList }) => {
       const mapify_backend_url = import.meta.env.VITE_mapify_backend_url;
 
 
@@ -10,7 +10,6 @@ const Members = ({ userData, setIsSearchFocused }) => {
 
   const [activeMember, setActiveMember] = useState(null);
 
-  const [membersList, setMembersList] = useState([]);
 
   const [memberPos, setMemberPos] = useState([]);
 

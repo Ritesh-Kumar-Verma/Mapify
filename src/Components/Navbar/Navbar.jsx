@@ -1,6 +1,6 @@
 import "./Navbar.css";
 import { assets } from "../../assets/assets";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const Navbar = ({
@@ -10,13 +10,38 @@ const Navbar = ({
   setUserData,
   setActiveTab,
   isSearchFocused,
-  setIsSearchFocused
+  setIsSearchFocused,
 }) => {
   const mapify_backend_url = import.meta.env.VITE_mapify_backend_url;
 
-  const navbarMenuItems = ["Members", "Groups", "Me", "Requests"];
+  const [dropdownactive , setDropDownActive] = useState(false)
 
-  const [membersList, setMembersList] = useState([]);
+  const tabs = ["Members", "Groups", "Me", "Requests", "Settings"];
+
+  const [navbarMenuItems, setNavbarMenuItems] = useState(tabs);
+  const [hiddenItems, setHiddenItems] = useState([]);
+
+  const handleResize = () => {
+
+    const wid = window.innerWidth / window.devicePixelRatio;
+
+    if (window.innerWidth <= 400) {
+      setNavbarMenuItems(tabs.slice(0, 3));
+      setHiddenItems(tabs.slice(3));
+    } else if (window.innerWidth <= 440) {
+      setNavbarMenuItems(tabs.slice(0, 4));
+      setHiddenItems(tabs.slice(4));
+    } else {
+      setNavbarMenuItems(tabs);
+      setHiddenItems([])
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+  }, []);
+
+  const [searchList, setSearchList] = useState([]);
 
   const handleLogout = () => {
     setLoginStatus(false);
@@ -36,7 +61,7 @@ const Navbar = ({
   const handleSearchBoxChange = (e) => {
     e.preventDefault();
     if (e.target.value.trim() == "") {
-      setMembersList([]);
+      setSearchList([]);
       return;
     }
     axios
@@ -45,7 +70,7 @@ const Navbar = ({
       })
       .then((res) => {
         // console.log(res.data)
-        setMembersList(res.data);
+        setSearchList(res.data);
         console.log(res.data);
       })
       .catch((error) => {
@@ -68,7 +93,9 @@ const Navbar = ({
   };
 
   return (
-    <header className={`navbar ${isSearchFocused ? "make-navbar-highest" : ""}`}>
+    <header
+      className={`navbar ${isSearchFocused ? "make-navbar-highest" : ""}`}
+    >
       <div className="navbar-top">
         <div className="left-navbar">
           {/* <img src={assets.boy} alt="" /> */}
@@ -80,12 +107,12 @@ const Navbar = ({
           <input
             type="text"
             placeholder="Search..."
-            onFocus={()=>setIsSearchFocused(true)}
+            onFocus={() => setIsSearchFocused(true)}
             onChange={handleSearchBoxChange}
           />
-          {isSearchFocused && membersList.length > 0 && (
+          {isSearchFocused && searchList.length > 0 && (
             <div className="search-result">
-              {membersList.map((data, index) => {
+              {searchList.map((data, index) => {
                 return (
                   <React.Fragment key={index}>
                     <div className="search-result-item">
@@ -102,6 +129,7 @@ const Navbar = ({
                   </React.Fragment>
                 );
               })}
+              {}
             </div>
           )}
         </div>
@@ -126,7 +154,38 @@ const Navbar = ({
               </div>
             );
           })}
+
+          {hiddenItems.length > 0 && (
+            <div className="dropdown-menu">
+              <div className="up-down" onClick={()=>{
+                setDropDownActive(dropdownactive?false:true)
+            }}>{dropdownactive ?'▴':'▾' } </div>
+              <div className="dropdown-menu-items">
+                {dropdownactive && hiddenItems.map((data, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className={`dropdown-item ${
+                        activeTab === data? "active" : ""
+                      }`}
+                      onClick={() =>
+                        {
+                          setActiveTab(data)
+                          setDropDownActive(false)
+                        } }
+                    >
+                      {data}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+          )}
+
+
         </div>
+
         <button className="logout-button" onClick={handleLogout}>
           LogOut
         </button>

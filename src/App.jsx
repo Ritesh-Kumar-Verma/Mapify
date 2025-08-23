@@ -6,7 +6,7 @@ import axios from "axios";
 
 function App() {
   const mapify_backend_url = import.meta.env.VITE_mapify_backend_url;
-
+  
   const [userData, setUserData] = useState({
     email: localStorage.getItem("email") || "",
     username: localStorage.getItem("username") || "",
@@ -16,10 +16,12 @@ function App() {
   const [users, setUsers] = useState({
     me: [0, 0],
   });
+  
+  const [loginStatus , setLoginStatus] = useState(true)
 
-  const [loginStatus, setLoginStatus] = useState(() => {
-    return localStorage.getItem("isLoggedIn") == "true";
-  });
+  // const [loginStatus, setLoginStatus] = useState(() => {
+  //   return localStorage.getItem("isLoggedIn") == "true";
+  // });
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -78,7 +80,6 @@ function App() {
       });
   }, [userData]);
 
-  // const [loginStatus , setLoginStatus] = useState(true)
 
   // console.log(loginStatus)
 

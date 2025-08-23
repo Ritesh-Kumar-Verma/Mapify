@@ -9,6 +9,7 @@
   font-weight: bold;
   margin-bottom: 0.8rem;
   color: #fff;
+  border-bottom: 1px solid white;
 }
 
 .request-row {
