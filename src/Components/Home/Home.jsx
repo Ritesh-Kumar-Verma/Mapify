@@ -9,7 +9,7 @@ import Requests from "../Requests/Requests";
 import Settings from "../Settings/Settings";
 
 const Home = ({userData,setUserData ,setLoginStatus , users ,setUsers}) => {
-    const [activeTab , setActiveTab] = useState("Settings")
+    const [activeTab , setActiveTab] = useState("Me")
 
       const [membersList, setMembersList] = useState([]);
 
@@ -30,7 +30,6 @@ const Home = ({userData,setUserData ,setLoginStatus , users ,setUsers}) => {
 
   return <div className="home-window">
     
-    {/* <Sidebar/> */}
 
     <Navbar userData={userData} setUserData={setUserData} setLoginStatus={setLoginStatus}  activeTab={activeTab} setActiveTab={setActiveTab} isSearchFocused={isSearchFocused} setIsSearchFocused={setIsSearchFocused} />
 

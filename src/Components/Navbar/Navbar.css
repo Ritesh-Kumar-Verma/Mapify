@@ -117,7 +117,7 @@
   cursor: pointer;
 }
 .active {
-  color: blue;
+  color: rgb(126, 178, 212);
   border-bottom: 1px blue solid;
 }
 

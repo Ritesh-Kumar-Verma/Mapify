@@ -9,18 +9,20 @@
   display: flex;
   width: 100vw;
   min-height: 100vh;
-  background-image: url("../../assets/left.jpg");
+  /* background-image: url("../../assets/left.jpg"); */
+  background-image: url("../../assets/mix.png");
   background-size: cover;
 }
 .login-window {
   display: flex;
   width: 100vw;
   min-height: 100vh;
-  background-image: url("../../assets/right.jpg");
+  background-image: url("../../assets/mix.png");
   background-size: cover;
 }
 .left-signup {
-  background: linear-gradient(to right, #6dd5fa, #2980b9);
+  /* background: linear-gradient(to right, #6dd5fa, #2980b9); */
+  background: rgba(38, 15, 79, 0.6);
   background-size: cover;
   display: flex;
   width: 40%;
@@ -53,6 +55,8 @@
 }
 
 .login-signup-window .left-signup form input {
+  font-size: 20px;
+  color: white;
   border: none;
   background: transparent;
   border-bottom: 1px solid white;
@@ -66,8 +70,7 @@
 #agreement {
   width: fit-content;
 }
-#agreement-label {
-}
+
 span {
   color: blue;
 }
@@ -81,10 +84,8 @@ span:hover {
   margin-right: 10px;
   margin-top: 10px;
   color: white;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 3px;
-  padding-bottom: 5px;
+  padding: 8px 10px;
+  border-radius: 3px;
 }
 #left-btn-signup:hover {
   cursor: pointer;
@@ -97,10 +98,8 @@ span:hover {
   width: fit-content;
   border: none;
   color: #ff5858;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 3px;
-  padding-bottom: 5px;
+  border-radius: 3px;
+  padding: 8px 10px;
 }
 .left-btn-login:hover {
   cursor: pointer;
@@ -109,7 +108,8 @@ span:hover {
 }
 
 .right-login {
-  background: linear-gradient(to right, #ff5858, #bc2b2b);
+  /* background: linear-gradient(to right, #ff5858, #bc2b2b); */
+  background: rgba(158, 25, 72, 0.6);
 
   width: 40%;
   display: flex;
@@ -144,6 +144,7 @@ span:hover {
 }
 
 .right-login form input {
+  color: white;
   border: none;
   background: transparent;
   border-bottom: 1px solid white;
@@ -153,15 +154,16 @@ span:hover {
   font-size: 20px;
 }
 .right-login .right-btn-login {
+
   width: fit-content;
   border: none;
   background-color: #ff5858;
   margin-right: 10px;
   color: white;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 3px;
-  padding-bottom: 5px;
+  
+  border-radius: 3px;
+  padding: 8px 10px;
+
 }
 .right-login .right-btn-login:hover{
   cursor: pointer;
@@ -176,10 +178,8 @@ span:hover {
   width: fit-content;
   border: none;
   color: #33b0dd;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 3px;
-  padding-bottom: 5px;
+  border-radius: 3px;
+  padding: 8px 10px;
 }
 .right-login .right-btn-signup:hover {
   cursor: pointer;
@@ -196,6 +196,17 @@ span:hover {
     width: 60%;
   }
 }
+@media (max-width:500px){
+  .right-login{
+    margin-left: 20%;
+    width: 80%;
+  }
+  .left-signup{
+    width: 80%;
+  }
+}
+
+
 button:focus {
   outline: 2px solid #ffffffaa;
   outline-offset: 2px;

@@ -77,7 +77,7 @@ const Requests = ({ userData,setIsSearchFocused }) => {
         {sentRequestsList.map((data, index) => (
           <div className="request-row" key={index}>
             <div className="requests-item">{data}</div>
-            <button >Cancel</button>
+            <button className="btn" >Cancel</button>
           </div>
         ))}
       </div>
@@ -88,8 +88,8 @@ const Requests = ({ userData,setIsSearchFocused }) => {
           <div className="request-row" key={index}>
             <div className="requests-item">{data}</div>
             <div className="button">
-              <button onClick={() => handleAccept(data)}>Accept</button>
-              <button onClick={()=>{handleReject(data)}}>Reject</button>
+              <button className="btn" onClick={() => handleAccept(data)}>Accept</button>
+              <button className="btn" onClick={()=>{handleReject(data)}}>Reject</button>
             </div>
           </div>
         ))}

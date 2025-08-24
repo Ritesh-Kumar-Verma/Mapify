@@ -2,7 +2,7 @@ import React from 'react'
 
 const PasswordSettings = () => {
   return (
-    <div>PasswordSettings</div>
+    <div>Coming Soon...</div>
   )
 }
 
