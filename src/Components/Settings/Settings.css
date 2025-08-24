@@ -16,10 +16,11 @@
     /* background-color: red; */
     cursor: pointer;
     padding: 10px;
+    color: white;
 
 }
 .active-member{
-    background-color: rgb(54, 170, 247);
+    background-color: rgb(6, 87, 141);
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
