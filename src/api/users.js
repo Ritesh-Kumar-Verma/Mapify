@@ -8,7 +8,7 @@ const unauthorised = (error) => {
     
   if (error.response?.status === 401) {
     toast.error("Session expired. Please log in again.");
-    // logout()
+    logout()
     throw new Error("401 Unauthorized: JWT expired or invalid");
   }
   throw error.response ? error.response.data : error;
@@ -18,7 +18,7 @@ export const authHeader = ()=>{
     const jwttoken = localStorage.getItem("jwttoken")
     if(!jwttoken){
         toast.error("Login Again")
-        // logout()
+        logout()
         setTimeout(() => {
           window.location.href = "/login"
         }, 3000);
