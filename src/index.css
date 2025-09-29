@@ -1,0 +1,31 @@
+@import 'tailwindcss';
+
+/*for map display*/
+
+
+
+
+
+
+/* Tailwind Animations (add to your global CSS) */
+@keyframes slide-right-left {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(100%); opacity: 0; }
+}
+
+@keyframes slide-left-to-right {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+
+body {
+  margin: 0;
+background: linear-gradient(180deg, #1b2a3a 0%, #2e1b3a 100%);
+  background-attachment: fixed;
+  
+}
+
+
+.animate-slide-right-left { animation: slide-right-left 0.4s ease-in reverse both; }
+.animate-slide-left-to-right { animation: slide-left-to-right 0.5s ease forwards; }
