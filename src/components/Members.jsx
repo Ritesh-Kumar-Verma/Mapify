@@ -67,7 +67,7 @@ const Members = ({
 
   return (
     <div className="flex-1 flex" onClick={() => setIsSearchFocused(false)}>
-      {!loading && (
+      {!loading && activeMember === null && (
         <div className="w-full text-cyan-300 text-4xl text-center">
           No Members Found!
         </div>
