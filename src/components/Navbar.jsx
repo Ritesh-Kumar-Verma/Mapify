@@ -81,9 +81,9 @@ const Navbar = ({
       <Toast />
       <div className="flex flex-row  items-center justify-between pb-2.5 border-b border-white">
         
-        <div className="flex-1 text-white  max-sm:flex-0 p-2" >Mapify</div>
+        <div className="flex-1 text-white  max-sm:flex-0 p-2 " >Mapify</div>
 
-        <div className=" flex-2 flex items-center border border-gray-400 rounded-md px-2 py-1 relative max-sm:flex-1 hover:border-white ">
+        <div className=" flex-2 flex items-center border border-gray-400 rounded-md px-2 py-1 relative max-sm:flex-2 hover:border-white ">
           <img src={assets.search} alt="" />
           <input
             type="text"
@@ -136,7 +136,7 @@ const Navbar = ({
           )}
         </div>
 
-        <div className="flex-1 flex justify-end items-center gap-1 pl-4 ">
+        <div className="flex-1 flex justify-end items-center gap-1 pl-4  ">
           <div className="navbar-username">{currentUsername}</div>
           <img className="h-9" src={assets.boy} alt="" />
         </div>

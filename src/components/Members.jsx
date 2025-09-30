@@ -8,7 +8,8 @@ const Members = ({
   membersList,
   setMembersList,
 }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
+  const [memberPosLoading , setMemberPosLoading] = useState(false)
 
   const [activeMember, setActiveMember] = useState(null);
 
@@ -37,8 +38,16 @@ const Members = ({
   }, [membersList]);
 
   const fetchLocation = async (username) => {
-    const location = await getLocation(username);
-    setMemberPos([location.latitude, location.longitude]);
+    try{
+      setMemberPosLoading(true)
+      const location = await getLocation(username);
+      setMemberPos([location.latitude, location.longitude]);
+      setMemberPosLoading(false)
+    }
+    catch(error){
+      console.log(error)
+    }
+    
   };
 
   useEffect(() => {
@@ -59,8 +68,9 @@ const Members = ({
 
   if (loading) {
     return (
-      <div className="h-full flex items-center justify-center">
+      <div className="h-full flex flex-col items-center justify-center text-white  ">
         <Loading height={2} />
+        Loading...
       </div>
     );
   }
@@ -72,7 +82,7 @@ const Members = ({
           No Members Found!
         </div>
       )}
-      <div className="members-list flex flex-col gap-3 ">
+      <div className="members-list flex flex-col gap-3 border-r-2 border-white">
         {membersList.map((data, index) => {
           return (
             <div
@@ -89,8 +99,8 @@ const Members = ({
           );
         })}
       </div>
-      <div className="flex-1 mt-0 mb-4 mx-4 ">
-        {memberPos.length > 0 && <Map position={memberPos} />}
+      <div className="flex-1 mt-0 mb-4 mx-4 relative ">
+        { (memberPosLoading && memberPos.length ===0) ? <div className="w-full  h-full flex flex-col items-center justify-center text-white"><Loading height={2} />Loading...</div> : (memberPos.length > 0 && <Map position={memberPos} />) }
       </div>
     </div>
   );
