@@ -1,8 +1,9 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import {logout} from "./auth"
 
 const url = import.meta.env.VITE_MAPIFY_BACKEND_URL_V2;
+const basename = import.meta.env.VITE_MAPIFY_BASENAME
 
 const unauthorised = (error) => {
     
@@ -18,9 +19,8 @@ export const authHeader = ()=>{
     const jwttoken = localStorage.getItem("jwttoken")
     if(!jwttoken){
         toast.error("Login Again")
-        logout()
         setTimeout(() => {
-          window.location.href = ""
+            logout()
         }, 3000);
         throw new Error("No JWT Token Found")
     }

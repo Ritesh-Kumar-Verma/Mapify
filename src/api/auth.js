@@ -2,6 +2,8 @@ import axios from "axios";
 import {authHeader} from "./users"
 const url = import.meta.env.VITE_MAPIFY_BACKEND_URL_V2;
 const basename = import.meta.env.VITE_MAPIFY_BASENAME
+
+
 export const register = async (userLoginInfo) => {
   try {
     const res = await axios.post(`${url}/register`, userLoginInfo);
@@ -29,15 +31,14 @@ export const login = async (userLoginInfo) => {
 };
 
 export const logout = ()=>{
-    localStorage.removeItem("jwttoken")
-    localStorage.removeItem("email")
-    localStorage.removeItem("username")
-    localStorage.removeItem("password")
-    localStorage.removeItem("loginStatus")
-    localStorage.removeItem("currentUsername")
-    window.location.href = `${basename}/#/login`
-
-    
+  localStorage.removeItem("jwttoken")
+  localStorage.removeItem("email")
+  localStorage.removeItem("username")
+  localStorage.removeItem("password")
+  localStorage.removeItem("loginStatus")
+  localStorage.removeItem("currentUsername")
+  window.location.href = `${basename}/#/login`    
+  window.location.reload()
 }
 
 

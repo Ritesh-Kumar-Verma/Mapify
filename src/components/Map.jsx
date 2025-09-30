@@ -40,13 +40,13 @@ const Map = ({ position }) => {
     <div
       className={`h-full ${
         fullScreen
-          ? "fixed top-0 left-0 w-screen h-screen z-[99999]" // cover everything including navbar
-          : "w-full h-96" // normal view
+          ? "fixed top-0 left-0 w-screen h-screen z-[99999]" 
+          : "w-full h-96" 
       }`}
     >
-      {/* Fullscreen toggle button */}
+
       <button
-        className="absolute top-2 right-2 z-[100000] px-3 py-1 bg-gray-700 bg-opacity-60 text-white rounded hover:bg-gray-900"
+        className="absolute top-2 right-2 z-[11] px-3 py-1 bg-gray-700 bg-opacity-60 text-white rounded hover:bg-gray-900"
         onClick={handleFullScreen}
       >
         {fullScreen ? "🗗" : "⛶"}
@@ -57,6 +57,7 @@ const Map = ({ position }) => {
           center={position}
           zoom={18}
           className="w-full h-full"
+          style={{zIndex:10}}
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           <Marker position={position} icon={customIcon}>

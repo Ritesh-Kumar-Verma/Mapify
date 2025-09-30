@@ -21,7 +21,7 @@ const Navbar = ({
   const [navbarMenuItems, setNavbarMenuItems] = useState(tabs);
   const [hiddenItems, setHiddenItems] = useState([]);
   const [searchList, setSearchList] = useState([]);
-  const [searchKeyword , setSearchKeyword] = useState("")
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   const handleResize = () => {
     const wid = window.innerWidth / window.devicePixelRatio;
@@ -48,25 +48,21 @@ const Navbar = ({
   };
 
   const handleSearch = async (e) => {
-   
     try {
-        const res = await search(searchKeyword);
-        setSearchList(res);
-        
+      const res = await search(searchKeyword);
+      setSearchList(res);
     } catch (error) {
       console.log(error);
     }
-
-    
   };
-  useEffect(()=>{
-    if(searchKeyword.length>=1){
-      handleSearch(searchKeyword)
+  useEffect(() => {
+    if (searchKeyword.length >= 1) {
+      handleSearch(searchKeyword);
     }
-    if(searchKeyword.length === 0){
-      setSearchList([])
+    if (searchKeyword.length === 0) {
+      setSearchList([]);
     }
-  },[searchKeyword])
+  }, [searchKeyword]);
 
   const handleSendRequest = async (username) => {
     try {
@@ -78,35 +74,47 @@ const Navbar = ({
 
   return (
     <header
-      className={`m-2.5 p-4 rounded-xl border border-white/20 backdrop-blur-[12px] bg-white/10 shadow-[0_0_20px_rgba(0,255,255,0.4)] text-white text-base ${
+      className={`z-[1000] m-2.5 p-4 rounded-xl border border-white/20 backdrop-blur-[12px] bg-white/10 shadow-[0_0_20px_rgba(0,255,255,0.4)] text-white text-base ${
         isSearchFocused ? "z-[10000]" : ""
       } hover:shadow-[0_0_25px_rgba(0,255,255,0.7)]`}
     >
       <Toast />
-      <div className="flex flex-row gap-2.5 items-center justify-between pb-2.5 border-b border-white">
-        <div className="flex-1 text-white">
-          Mapify
-        </div>
+      <div className="flex flex-row  items-center justify-between pb-2.5 border-b border-white">
+        
+        <div className="flex-1 text-white  max-sm:flex-0 p-2" >Mapify</div>
 
-        <div className="flex-2 flex items-center border border-gray-400 rounded-md p-[2px_0px_2px_10px] relative ">
+        <div className=" flex-2 flex items-center border border-gray-400 rounded-md px-2 py-1 relative max-sm:flex-1 hover:border-white ">
           <img src={assets.search} alt="" />
           <input
             type="text"
             placeholder="Search..."
-            className="pl-2 bg-transparent w-[95%] border-none text-[17px] focus:outline-none"
+            className="pl-1 bg-transparent w-[95%] border-none text-lg  focus:outline-none "
             onFocus={() => setIsSearchFocused(true)}
-            onChange={(e)=>setSearchKeyword(e.target.value.trim())}
+            onChange={(e) => setSearchKeyword(e.target.value.trim())}
             value={searchKeyword}
           />
-          <button className="text-gray-400 font-bold hover:bg-gray-600   rounded-full mr-1 flex items-center justify-center" onClick={()=>{
-            setIsSearchFocused(false)
-            setSearchKeyword("")
-
-          }} >
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-  </svg>
-</button>
+          <button
+            className="text-gray-400 font-bold hover:bg-gray-600   rounded-full mr-1 flex items-center justify-center"
+            onClick={() => {
+              setIsSearchFocused(false);
+              setSearchKeyword("");
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
 
           {isSearchFocused && searchList && (
             <div className="absolute top-[105%] left-0 bg-white rounded-b-xl w-full">
@@ -128,12 +136,13 @@ const Navbar = ({
           )}
         </div>
 
-        <div className="flex-1 flex justify-end items-center gap-1.5">
+        <div className="flex-1 flex justify-end items-center gap-1 pl-4 ">
           <div className="navbar-username">{currentUsername}</div>
           <img className="h-9" src={assets.boy} alt="" />
         </div>
       </div>
 
+      
       <div className="flex flex-row flex-wrap justify-between gap-2.5 mt-2.5">
         <div className="flex gap-2.5">
           {navbarMenuItems.map((data, index) => (
@@ -153,14 +162,15 @@ const Navbar = ({
           {hiddenItems.length > 0 && (
             <div className="relative">
               <div
-                className="cursor-pointer"
+                className="cursor-pointer text-2xl"
                 onClick={() => setDropDownActive(!dropdownactive)}
               >
+
                 {dropdownactive ? "▴" : "▾"}
               </div>
-              <div className="absolute top-[120%] bg-[#3498db] rounded-md">
-                {dropdownactive &&
-                  hiddenItems.map((data, index) => (
+              {dropdownactive && (
+                <div className="absolute top-[120%] bg-[#3498db] rounded-md ">
+                  {hiddenItems.map((data, index) => (
                     <div
                       key={index}
                       className={`text-white border-b last:border-b-0 border-black px-1 py-1 cursor-pointer ${
@@ -176,7 +186,8 @@ const Navbar = ({
                       {data}
                     </div>
                   ))}
-              </div>
+                </div>
+              )}
             </div>
           )}
         </div>

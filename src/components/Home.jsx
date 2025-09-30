@@ -30,7 +30,7 @@ const Home = ({ setLoginStatus, currentUsername  }) => {
     }
   }, []);
 
-  const [activeTab, setActiveTab] = useState("Requests");
+  const [activeTab, setActiveTab] = useState("Me");
 
   const [membersList, setMembersList] = useState([]);
 
