@@ -76,15 +76,15 @@ const Login = ({ setLoginStatus, setCurrentUsername }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center  p-6">
+    <div className="min-h-screen flex items-center justify-center  p-6 [@media(max-width:400px)]:p-3 ">
       <Toast />
 
       <div className="w-full max-w-[900px] h-[560px] bg-[linear-gradient(180deg,#1b2a3a_0%,#391f44_100%)] rounded-2xl  overflow-hidden flex shadow-[0_0_20px_rgba(0,255,255,0.4)] hover:shadow-[0_0_25px_rgba(0,255,255,0.7)]">
         {/* left half */}
-        <div className="w-1/2 relative p-8 flex items-center justify-center">
+        <div className="w-1/2 relative flex items-center justify-center">
           {/* login form page === 'login' */}
           <div
-            className={`absolute inset-0 flex flex-col justify-center items-center px-6 transition-all duration-700 ease-in-out transform
+            className={`absolute inset-0 flex flex-col justify-center items-center px-6 [@media(max-width:400px)]:px-2 transition-all duration-700 ease-in-out transform
               ${
                 page === "login"
                   ? "translate-x-0 opacity-100 z-20 pointer-events-auto"
@@ -121,7 +121,7 @@ const Login = ({ setLoginStatus, setCurrentUsername }) => {
 
           {/* left info page === 'signup' */}
           <div
-            className={`absolute inset-0 flex flex-col justify-center items-center px-6 transition-all duration-700 ease-in-out transform
+            className={`absolute inset-0 flex flex-col justify-center items-center px-6 [@media(max-width:400px)]:px-2 [@media(max-width:400px)]:px-2 transition-all duration-700 ease-in-out transform
               ${
                 page === "signup"
                   ? "translate-x-0 opacity-100 z-20 pointer-events-auto"
@@ -155,7 +155,7 @@ const Login = ({ setLoginStatus, setCurrentUsername }) => {
         <div className="w-1/2 relative p-8 flex items-center justify-center bg-[linear-gradient(0deg,#1b2a3a_0%,#391f44_100%)]">
           {/* signup form  page === 'signup' */}
           <div
-            className={`absolute inset-0 flex flex-col justify-center items-center px-6 transition-all duration-700 ease-in-out transform
+            className={`absolute inset-0 flex flex-col justify-center items-center px-6 [@media(max-width:400px)]:px-2 transition-all duration-700 ease-in-out transform
               ${
                 page === "signup"
                   ? "translate-x-0 opacity-100 z-20 pointer-events-auto"
@@ -163,7 +163,7 @@ const Login = ({ setLoginStatus, setCurrentUsername }) => {
               }
             `}
           >
-            <h2 className="text-3xl font-bold mb-4 text-gray-800">Sign Up</h2>
+            <h2 className="text-3xl font-bold mb-4 text-cyan-400">Sign Up</h2>
             <form className="w-full max-w-sm" onSubmit={handleSignUpSubmit}>
               <input
                 className="w-full mb-4 p-3 rounded bg-gray-100 focus:outline-none focus:ring-2 focus:ring-pink-400"
@@ -198,7 +198,7 @@ const Login = ({ setLoginStatus, setCurrentUsername }) => {
 
           {/* right info  page === 'login'*/}
           <div
-            className={`absolute inset-0 flex flex-col justify-center items-center px-6 transition-all duration-700 ease-in-out transform
+            className={`absolute inset-0 flex flex-col justify-center items-center px-6 [@media(max-width:400px)]:px-2 [@media(max-width:400px)]:px-2 transition-all duration-700 ease-in-out transform
               ${
                 page === "login"
                   ? "translate-x-0 opacity-100 z-20 pointer-events-auto"
