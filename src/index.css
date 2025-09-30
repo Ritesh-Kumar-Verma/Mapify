@@ -1,13 +1,13 @@
 @import 'tailwindcss';
 
-/*for map display*/
 
 
 
 
 
 
-/* Tailwind Animations (add to your global CSS) */
+
+
 @keyframes slide-right-left {
   from { transform: translateX(0); opacity: 1; }
   to { transform: translateX(100%); opacity: 0; }
