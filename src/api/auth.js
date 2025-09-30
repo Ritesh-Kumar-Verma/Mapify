@@ -35,7 +35,7 @@ export const logout = ()=>{
     localStorage.removeItem("password")
     localStorage.removeItem("loginStatus")
     localStorage.removeItem("currentUsername")
-    window.location.href = ""
+    window.location.href = "/login"
 
     
 }

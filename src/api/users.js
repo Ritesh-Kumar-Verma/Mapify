@@ -20,7 +20,7 @@ export const authHeader = ()=>{
         toast.error("Login Again")
         logout()
         setTimeout(() => {
-          window.location.href = "/login"
+          window.location.href = ""
         }, 3000);
         throw new Error("No JWT Token Found")
     }
