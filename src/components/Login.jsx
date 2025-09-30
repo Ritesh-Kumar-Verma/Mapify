@@ -3,8 +3,11 @@ import React, { use, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Toast from "./Toast";
 import { login, register } from "../api/auth";
+import Loading from "./Loading"
+
 
 const Login = ({ setLoginStatus, setCurrentUsername }) => {
+  const [loading , setLoading] = useState(false)
   const url = import.meta.env.VITE_MAPIFY_BACKEND_URL_V2;
   const [page, setPage] = useState("login");
 
@@ -46,10 +49,13 @@ const Login = ({ setLoginStatus, setCurrentUsername }) => {
     }
 
     try {
+      setLoading(true)
       const data = await register(userLoginInfo);
       setCurrentUsername(userLoginInfo.username);
       setLoginStatus(true);
+
     } catch (errorMessage) {
+      setLoading(false)
       toast.error(errorMessage);
     }
 
@@ -64,11 +70,13 @@ const Login = ({ setLoginStatus, setCurrentUsername }) => {
     }
 
     try {
+      setLoading(true)
       const data = await login(userLoginInfo);
       setCurrentUsername(userLoginInfo.username);
 
       setLoginStatus(true);
     } catch (errorMessage) {
+      setLoading(false)
       toast.error(errorMessage);
     }
 
@@ -76,10 +84,21 @@ const Login = ({ setLoginStatus, setCurrentUsername }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center  p-6 [@media(max-width:400px)]:p-3 ">
+    <div className="min-h-screen flex items-center justify-center  p-6 [@media(max-width:400px)]:p-3  ">
+      
       <Toast />
 
-      <div className="w-full max-w-[900px] h-[560px] bg-[linear-gradient(180deg,#1b2a3a_0%,#391f44_100%)] rounded-2xl  overflow-hidden flex shadow-[0_0_20px_rgba(0,255,255,0.4)] hover:shadow-[0_0_25px_rgba(0,255,255,0.7)]">
+    <div className={`absolute bottom-12 z-1000   flex flex-col items-center text-white 
+      ${loading ?"opacity-100":"opacity-0"}
+      `}>
+      <Loading height={2} />
+      Loading...
+    </div>
+
+      <div className={`w-full max-w-[900px] h-[560px] bg-[linear-gradient(180deg,#1b2a3a_0%,#391f44_100%)] rounded-2xl  overflow-hidden flex shadow-[0_0_20px_rgba(0,255,255,0.4)] hover:shadow-[0_0_25px_rgba(0,255,255,0.7)] 
+        ${loading ? "opacity-40":""}
+        `}>
+
         {/* left half */}
         <div className="w-1/2 relative flex items-center justify-center">
           {/* login form page === 'login' */}
@@ -121,7 +140,7 @@ const Login = ({ setLoginStatus, setCurrentUsername }) => {
 
           {/* left info page === 'signup' */}
           <div
-            className={`absolute inset-0 flex flex-col justify-center items-center px-6 [@media(max-width:400px)]:px-2 [@media(max-width:400px)]:px-2 transition-all duration-700 ease-in-out transform
+            className={`absolute inset-0 flex flex-col justify-center items-center px-6  [@media(max-width:400px)]:px-2 transition-all duration-700 ease-in-out transform
               ${
                 page === "signup"
                   ? "translate-x-0 opacity-100 z-20 pointer-events-auto"
@@ -198,7 +217,7 @@ const Login = ({ setLoginStatus, setCurrentUsername }) => {
 
           {/* right info  page === 'login'*/}
           <div
-            className={`absolute inset-0 flex flex-col justify-center items-center px-6 [@media(max-width:400px)]:px-2 [@media(max-width:400px)]:px-2 transition-all duration-700 ease-in-out transform
+            className={`absolute inset-0 flex flex-col justify-center items-center px-6  [@media(max-width:400px)]:px-2 transition-all duration-700 ease-in-out transform
               ${
                 page === "login"
                   ? "translate-x-0 opacity-100 z-20 pointer-events-auto"
