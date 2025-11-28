@@ -45,7 +45,7 @@ const PasswordSettings = () => {
         <input type="password" onChange={onChange} name='currentPassword' placeholder='Enter Current Password' className='p-2 rounded w-50 bg-white   '/>
         <input type="password" onChange={onChange} name='newPassword' placeholder='Enter new Password'  className='p-2 rounded w-50 bg-white   '/>
         <input type="password" onChange={onChange} name='reTypeNewPassword' placeholder='Retype new Password' className='p-2 rounded w-50 bg-white   '/>
-        <button className='p-2 rounded w-50 bg-green-400' >Reset Passord</button>
+        <button className='p-2 rounded w-50 bg-green-400' >Reset Password</button>
       </form>
       <Toast/>
     </div>
